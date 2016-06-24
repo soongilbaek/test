@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="user04"></property>
+		<property name="password" value="user04"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+	</bean>
+	<bean id="boardDAO" class="com.choa.board.BoardDAO">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="boardService" class="com.choa.board.BoardService">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	<bean id="guestDAO" class="com.choa.guest.GuestDAO">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="guestService" class="com.choa.guest.GuestService">
+		<property name="guestDAO" ref="guestDAO"></property>
+	</bean>
+</beans>
